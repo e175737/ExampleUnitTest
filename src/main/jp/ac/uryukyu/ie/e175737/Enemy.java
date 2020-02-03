@@ -9,6 +9,7 @@ package jp.ac.uryukyu.ie.e175737;
  * Created by tnal on 2016/11/13.
  */
 public class Enemy extends LivingThing {
+
     /**
      * コンストラクタ。名前、最大HP、攻撃力を指定する。
      * @param name 名前
@@ -17,10 +18,10 @@ public class Enemy extends LivingThing {
      */
     public Enemy (String name, int maximumHP, int attack) {
         super(name, maximumHP, attack);
-        this.name = name;
-        hitPoint = maximumHP;
-        this.attack = attack;
-        dead = false;
+        setName(name);
+        setHitPoint(maximumHP);
+        setAttack(attack);
+        setDead(false);
     }
 
     /**
@@ -30,10 +31,14 @@ public class Enemy extends LivingThing {
      */
     @Override
     public void wounded(int damage){
+        int hitPoint = getHitPoint();
+        System.out.println("hitPoint="+hitPoint+"-"+damage);
         hitPoint -= damage;
+        setHitPoint(hitPoint);
+        //super.wounded(damage);
         if( hitPoint < 0 ) {
-            dead = true;
-            System.out.printf("モンスター%sは倒れた。\n", name);
+            setDead(true);
+            System.out.printf("モンスター%sは倒れた。\n", getName());
         }
     }
 

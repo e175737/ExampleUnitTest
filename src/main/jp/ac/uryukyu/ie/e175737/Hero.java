@@ -18,10 +18,10 @@ public class Hero extends LivingThing {
      */
     public Hero (String name, int maximumHP, int attack) {
         super(name, maximumHP, attack);
-        this.name = name;
-        hitPoint = maximumHP;
-        this.attack = attack;
-        dead = false;
+        setName(name);
+        setHitPoint(maximumHP);
+        setAttack(attack);
+        setDead(false);
     }
 
     /**
@@ -31,10 +31,15 @@ public class Hero extends LivingThing {
      */
     @Override
     public void wounded(int damage){
+        String name = getName();
+        int hitPoint = getHitPoint();
+        System.out.println("hitPoint="+hitPoint+"-"+damage);
         hitPoint -= damage;
+        setHitPoint(hitPoint);
+        //super.wounded(damage);
         if( hitPoint < 0 ) {
-            dead = true;
-            System.out.printf("勇者%sは道半ばで力尽きてしまった。\n", name);
+            setDead(true);
+            System.out.printf("勇者%sは道半ばで力尽きてしまった。\n", getName());
         }
     }
 }
